@@ -1,0 +1,19 @@
+<div class="row" style="width:800px;margin:15px 0 15px 30px;">
+  <div class="col-md-4">
+    <select class="form-control" ng-model="vm.country" ng-options="country.label for country in vm.countries">
+      <option value="">-- 请选择国家 --</option>
+    </select>
+  </div>
+  <div class="col-md-4" ng-if="vm.country.provinces">
+      <select class="form-control" ng-model="vm.province"
+            ng-options="province.label for province in vm.country.provinces">
+      <option value="">-- 请选择省份/州 --</option>
+    </select>
+  </div>
+  <div class="col-md-4" ng-if="vm.province.cities">
+    <select class="form-control" ng-model="vm.city" ng-options="city.label for city in vm.province.cities">
+      <option value="">-- 请选择城市/县区 --</option>
+    </select>
+  </div>
+</div>
+<div>选择的是：{{vm.country.label}} - {{vm.province.label}} - {{vm.city.label}}</div>

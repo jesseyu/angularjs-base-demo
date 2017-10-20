@@ -1,0 +1,190 @@
+<style type="text/css">
+	.xmain{width:1300px;margin:0 auto;}
+	.button{text-align:center;padding:15px 0;}
+	.zp_order_head{position:relative;}
+	.zp_order_head .zp_title{text-align:center;margin:30px 0;font-size:40px;}
+	.zp_order_head .logo{position:absolute;left:30px;top:11px;display:block;font-size:25px;font-weight:bold;}
+	.zp_order_head .zp_baseinfo{width:800px;margin-left:30px;}
+	.zp_order_head .zp_baseinfo .form-group{margin-right:10px;margin:0 10px 20px 0;float:left;}
+	.zp_order_body{padding:0 30px;}
+	.code{position:absolute;right:20px;top:0;text-align:center;}
+	.code img{width:130px;height:130px;}
+	.zp_order_body .table{margin:0;}
+	.zp_order_body .table th{text-align:center;}
+	.collect{overflow:hidden;border:1px solid #ddd;padding:20px 25px 10px 25px;}
+	.collect .collect_form{float:right;}
+	.collect .collect_text{float:right;}
+	.collect .collect_text p{font-weight:bold;font-size:15px;}
+	.collect .form-group{float:left;margin-right:15px;}
+	.zp_order_footer{margin:10px 15px;}
+	.zp_order_footer .shopAuthor{text-align:right;}
+	.signature{overflow:hidden;text-align:left;padding:15px 0;border:1px solid #ddd;}
+	.signatureCode{border-right:1px solid #ddd;}
+	.signatureCode img{width:110px;height:110px;float:left;}
+	.signatureCode p{font-weight:bold;}
+	.signatureTextarea{width:680px;}
+	.signatureNotice{position:relative;}
+	.signatureText{position:absolute;right:160px;bottom:15px;font-weight:bold;}
+	.addProduct{text-align:left;padding:15px 0;}
+</style>
+               
+<div class="xmain">
+	<div class="panel panel-default" id="print" style="overflow:hidden;">
+		<div class="zp_order_head">
+			<div class="logo">LOGO</div>
+			<h2 class="zp_title">租凭单</h2>
+			<div class="code">
+				<qrcode data="{{rentOrder.url}}" href="{{rentOrder.url}}" size="100"></qrcode>
+				<p class="code_id" ng-bind="rentOrder.id"></p>
+			</div>
+			<div class="zp_baseinfo">
+				<div class="form-group">
+					<label for="exampleInputName2">客户姓名:</label>
+					<input type="text" class="form-control" placeholder="请输入" ng-model="vm.orderBaseInfo.name">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">地址:</label>
+					<input type="text" class="form-control" placeholder="请输入" ng-model="vm.orderBaseInfo.homeUrl">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">联系方式:</label>
+					<input type="text" class="form-control" placeholder="请输入" ng-model="vm.orderBaseInfo.phone">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputName2">租凭时间:</label>
+					<div class="rows" style="width:400px;">
+						<div class="col-md-5">
+							<p class="input-group">
+				                <input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.orderBaseInfo.zpStartTime" is-open="open1" datepicker-options="{maxDate:(vm.orderBaseInfo.zpEndTime),showWeeks:false}" ng-required="true" clear-text="清空" current-text="今天" close-text="取消" alt-input-formats="altInputFormats" ng-click="open1=!open1"/>
+				                <span class="input-group-btn">
+				                    <button type="button" class="btn btn-default" ng-click="open1=!open1"><i class="glyphicon glyphicon-calendar"></i></button>
+				                </span>
+			                </p>
+						</div>
+						<div class="col-md-1">
+							至
+						</div>
+						<div class="col-md-6">
+							<p class="input-group">
+		             			<input type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="vm.orderBaseInfo.zpEndTime" is-open="open2" datepicker-options="{minDate:(vm.orderBaseInfo.zpStartTime),showWeeks:false}" ng-required="true" clear-text="清空" current-text="今天" close-text="取消"  ng-click="open2=!open2"/>
+			                  <span class="input-group-btn">
+			                    <button type="button" class="btn btn-default" ng-click="open2=!open2"><i class="glyphicon glyphicon-calendar"></i></button>
+			                  </span>
+		                	</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="zp_order_body">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="60">序号</th>
+						<th>产品</th>
+						<th>单位</th>
+						<th>租金/天</th>
+						<th>数量</th>
+						<th>小计</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-show="!productlist.length">
+						<td colspan="6" style="text-align:center;color:red;padding:75px 0;font-size:16px;">暂无产品,请先添加!</td>
+					</tr>
+					<tr ng-show="productlist.length" ng-repeat="product in productlist">
+						<th scope="row" ng-bind="$index+1"></th>
+						<td>
+							<span ng-bind="product.productName" ng-show="!product.proNameShowing"></span>
+							<div ng-show="product.proNameShowing" style="position:relative;">
+								<div class="rows">
+									<div class="col-md-10">
+		<input type="text" ng-model="selected" uib-typeahead="state.productName for state in states | filter:$viewValue | limitTo:8" class="form-control" typeahead-loading="loadingLocations"  typeahead-no-results="noResults" typeahead-on-select="onSelect($item, $model, $label, $event,$index)">
+									</div>
+									<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+								    <div ng-show="noResults" style="position:absolute;top:35px;left:16px;z-index:999;background:#fff;border:1px solid #ddd;width:140px;height:40px;line-height:40px;text-align:center;">
+								       暂无数据
+								    </div>
+									<div class="col-md-2">
+										<button type="button" class="btn btn-info">选择</button>
+									</div>
+								</div>
+							</div>
+						</td>
+						<td>
+							<span ng-bind="product.unit == undefined  ? '-' : product.unit"></span>
+						</td>
+						<td>
+							<span ng-bind="product.day == undefined  ? '-' : product.day"></span>
+						</td>
+						<td>
+							<span ng-bind="product.count" ng-show="!product.countShowing"></span>
+							<div ng-show="product.countShowing">
+								<input type="number" class="form-control" ng-change="changeCount(product.count,$index)" ng-model="product.count">
+							</div>
+						</td>
+						<td>
+							<span ng-bind="(product.day * product.count > 0) ? product.day * product.count : 0"></span>
+						</td>
+						<td>
+							<button ng-click="del($index)">删除</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="addProduct">
+				<button type="button" class="btn btn-primary" ng-click="addProduct()">添加产品</button>
+			</div>
+			<div class="collect">
+				<div class="collect_text">
+					<p>应付金额：{{totalPrice() | number:2}}元</p>
+					<p>实付金额：{{(totalPrice() - vm.order.discount + vm.order.cashpLedge) > 0 ? (totalPrice() - vm.order.discount + vm.order.cashpLedge) : 0  | number:2}}元</p>
+				</div>
+				<div class="collect_form">
+					<div class="form-group">
+						<label for="exampleInputName2">会员优惠:</label>
+						<input type="number" class="form-control" ng-model="vm.order.discount">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputName2">押金:</label>
+						<input type="number" class="form-control" ng-model="vm.order.cashpLedge">
+					</div>
+				</div>
+			</div>
+			<div class="signature rows">
+				<div class="col-md-3 signatureCode">
+					<qrcode data="{{rentOrder.url}}" href="{{rentOrder.url}}" size="100"></qrcode>
+					<p>线上引流话术</p>
+				</div>
+				<div class="signatureNotice col-md-9">
+					<div class="signatureTextarea">
+						<p>客户须知:</p>
+						<textarea class="form-control" rows="3" ng-model="vm.orderBaseInfo.notice"></textarea>
+					</div>		
+					<div class="signatureText">
+						签名:
+					</div>		
+				</div>
+			</div>
+		</div>
+		<div class="zp_order_footer rows">
+			<p class="shopAddress col-md-4">门店地址:贵阳市云岩区xx街xx门店</p>
+			<p class="shopTel col-md-4">服务热线：0851-2323232</p>
+			<p class="shopAuthor col-md-4">经办人:xxxx</p>
+		</div>
+	</div>
+	<div class="button">
+		<button type="button" class="btn btn-default">返回</button>
+		<button type="button" class="btn btn-primary" ng-click="save()">保存</button>
+		<button type="button" class="btn btn-warning" ng-click="print()">打印</button>
+	</div>
+</div>
+
+
+
+
+
+ 
+
+
+

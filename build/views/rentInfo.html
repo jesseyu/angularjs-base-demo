@@ -1,0 +1,28 @@
+<style type="text/css">
+  .ablist{margin:0;padding:0;list-style: none;}
+  .ablist li{display:block;float:left;margin:10px;position:relative;}
+  .ablist h3{text-align:center;font-size:14px;font-weight:bold;}
+  .ablist p{display:block;width:100%;height:30px;position:absolute;bottom:35px;line-height:30px;text-align:center;color:#fff;}
+  .ablist p.pink{background:#ff00f0;}
+  .ablist p.yellow{background:#ff7f01;}
+  .ablist p.green{background:green;}
+  .ablist p.red{background:red;}
+</style>
+
+<div style="width:1080px;margin:0 auto;overflow:hidden;">
+    <ul class="ablist">
+          <li ng-repeat="rentItem in rentInfoList">
+              <img ng-src="{{rentItem.img}}"/>
+              <h3 ng-bind="rentItem.title"></h3>
+              <p ng-bind="rentItem.status | fiterRentType" 
+                ng-class="{ 
+                  'pink': rentItem.status == '0',
+                  'yellow': rentItem.status == '1',
+                  'green': rentItem.status == '2',
+                  'red': rentItem.status == '3',
+                }"></p>
+          </li>
+    </ul>
+</div>
+
+<ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" items-per-page="itemsperpage" force-ellipses="true" previous-text="上一页" next-text="下一页" style="clear: both;margin-left:220px;"></ul>

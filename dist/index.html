@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="webApp">
+    <head>
+        <meta charset="UTF-8">
+        <title>农投产品管理平台</title>
+        <link rel="stylesheet" type="text/css" href="css/app.css"/>
+        <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">
+        <link rel="stylesheet" type="text/css" href="vendor/angular-ui-grid/ui-grid.min.css">
+    </head>
+    <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">农投产品管理平台</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="index">主页 <span class="sr-only">(current)</span></a></li>
+                <li><a ui-sref="httpService">HTTP请求</a></li>
+                <li><a ui-sref="table">表格</a></li>
+                <li><a ui-sref="form">表单</a></li>
+                <li><a ui-sref="echarts">echarts图表</a></li>
+                <li><a ui-sref="rentInfo">租凭信息</a></li>
+                <li><a ui-sref="rentIndex">租售信息</a></li>
+                <li><a ui-sref="rentOrder">租凭单</a></li>
+                <li><a ui-sref="select">关联式多级下拉组件</a></li>
+                <li><a ui-sref="model">动态弹层+加载提示</a></li>
+            </ul>
+        </div>
+    </nav>
+	<div ui-view></div>
+    <!-- <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script> -->
+    <script type="text/javascript" src="vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="vendor/w5c-validator/w5cValidator.js"></script>
+    <script type="text/javascript" src="vendor/angular-ui-grid/ui-grid.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-ui-bootstrap/angular-locale_zh-cn.js"></script>
+    <script type="text/javascript" src="vendor/qrcode-generator/js/qrcode.js"></script>
+    <script type="text/javascript" src="vendor/qrcode-generator/js/qrcode_UTF8.js"></script>
+    <script type="text/javascript" src="vendor/qrcode-generator/js/angular-qrcode.js"></script>
+    <script type="text/javascript" src="vendor/echarts/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <!-- <script type="text/javascript" src="vendor/printarea/jquery.printarea.js"></script> -->
+    </body>
+</html>

@@ -1,0 +1,8 @@
+<div align="left">
+   <select data-ng-model="vm.chart" data-ng-options="x for (x, y) in vm.myCharts" data-ng-change="vm.showChange(vm.chart)"></select>        
+</div>
+<div id="context" style="width: 80%; height:100%;"> 
+	<div data-ng-show="vm.show" bar-charts  data-source='vm.groupData' style="width: 100%;height: 80%;"></div>
+	<div data-ng-show="!vm.show" pie-charts  data-source='vm.group' data-ng-repeat="group in vm.groupData" 
+	                 style="width:30%;height:30%;float:left;"></div>
+</div>

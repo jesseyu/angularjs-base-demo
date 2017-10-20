@@ -1,0 +1,86 @@
+<style type="text/css">
+	.xmain{width:1300px;margin:0 auto;}
+	.panel-info-right{float:right;font-weight:bold;}
+	.typeDataList{padding:15px 0;overflow:hidden;}
+	.typeDataItem{float:left;width:12.5%;}
+	.typeDataItem .icon{position:relative;width:100%;margin:0 auto;text-align:center;padding-top:5px;}
+	.icon .glyphicon{font-size:70px;}
+	.icon .itemTypeText,
+	.icon .dot{position:absolute;color:#fff;}
+	.icon .itemTypeText{display:block;top:30px;left:59px;font-weight:bold;}
+	.icon .dot{right:35px;top:5px;display:block;width:20px;height:20px;border-radius:100%;background:#ff8a00;}
+	.orangeText,
+	.blueText{width:90px;margin:0 auto;margin-top:5px;text-align:center;border-radius:8px;color:#fff;}
+	.orangeText{background:#ff7200;}
+	.blueText{background:#0096ff;}
+
+	.slide{width:200px;height:130px;overflow:hidden;}
+	.slide li{display:block;height:40px;line-height:40px;text-align:center;border-top:1px solid #ddd;}
+	.sideTable_Rent,
+	.sideTable_Sell{list-style:none;margin:0;padding:0;display:block;}
+	.sideTable_Rent li,
+	.sideTable_Sell li{display:block;height:40px;line-height:40px;border-bottom:1px solid #ddd;padding:0 10px;cursor:pointer;}
+	.sideTable_Rent li:hover,
+	.sideTable_Sell li:hover{background:#f7f7f7}
+</style>
+<div class="xmain">
+	<div class="row">
+	  	<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					租用信息 
+					<div class="panel-info-right">
+						总金额 ：<span ng-bind="rentList.totalMoney | number:2"></span> 元
+						今日订单：<span ng-bind="rentList.orderNum"></span>条
+					</div>
+				</div>
+				<div class="panel-body" style="height:239px;overflow:hidden;padding:0;">
+					<ul class="sideTable_Rent">
+						<slide-follow id="slide" datasetData="rentdata" howToLoad="pullRentdata()"></slide-follow>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					出售信息
+					<div class="panel-info-right">
+						总金额 ：<span ng-bind="sellList.totalMoney | number:2"></span> 元
+						今日订单：<span ng-bind="sellList.orderNum"></span>条
+					</div>
+				</div>
+				<div class="panel-body" style="height:239px;overflow:hidden;padding:0;">
+					<ul class="sideTable_Sell">
+						<slide-follow id="slide" datasetData="sellData" howToLoad="pullSellData()"></slide-follow>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="typeDataList panel panel-default">
+		<div class="typeDataItem" ng-repeat="item in typelist.list">
+			<div class="icon">
+				<span class="glyphicon glyphicon-home"></span>
+				<span class="itemTypeText" ng-bind="item.type"></span>
+				<span class="dot" ng-bind="item.round"></span>
+			</div>
+			<div class="orangeText" ng-bind="item.hightNum"></div>
+			<div class="blueText" ng-bind="item.lowNum"></div>
+		</div>
+	</div>
+</div>
+
+<!--租售清单模版-->
+<script type="text/ng-template" id="slidefollow.html">
+	<li ng-repeat="order in datasetdata" class="row">
+		<div ng-bind="order.createTime" class="col-md-2"></div>
+		<div ng-bind="order.shopName" class="col-md-2"></div>
+		<div ng-bind="order.product" class="col-md-2"></div>
+		<div ng-bind="order.count + '台'" class="col-md-2"></div>
+		<div ng-bind="'共' + order.rentDate +'天'" class="col-md-2"></div>
+		<div ng-bind="(order.totalPrices | number:2) + '元' " class="col-md-2"></div>
+	</li>
+</script>
+
+

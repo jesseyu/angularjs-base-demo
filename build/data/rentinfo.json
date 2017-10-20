@@ -1,0 +1,36 @@
+{
+	"total": 100,
+	"data": [{
+		"title": "挖掘机",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 0
+	}, {
+		"title": "植保机械",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 1
+	}, {
+		"title": "排灌机",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 1
+	}, {
+		"title": "动力输送机械",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 3
+	}, {
+		"title": "挖掘机",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 3
+	}, {
+		"title": "植保机械",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 1
+	}, {
+		"title": "排灌机",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 2
+	}, {
+		"title": "动力输送机械",
+		"img": "http://192.168.1.24:9999/images/1.jpg",
+		"status": 3
+	}]
+}
