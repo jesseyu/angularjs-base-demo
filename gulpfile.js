@@ -90,7 +90,7 @@ gulp.task('server',["build"],function(){
 	$.connect.server({
 		root:[app.devPath],
 		livereload:true,
-		port:9999
+		port:1222
 	});
 
 	open("http://localhost:9999");
